@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Migrating the WordPress Community from Slack to Matrix</title>
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/moon.css">
+	<style>
+		:root {
+			--r-heading1-size: 3em;
+		}
+		object {
+			fill: var( --r-background-color );
+			background: var( --r-background-color );
+		}
+		ul li {
+			margin-bottom: .5em;
+			list-style-type: none;
+		}
+		table.contact {
+			margin-top: 2em;
+		}
+		table.contact tr td, table.contact tr td a {
+			color: var( --r-main-color );
+		}
+		table.contact tr td {
+			font-size: 90%;
+			border-bottom: 0;
+		}
+		a:link {
+			text-decoration: underline;
+		}
+		a.normal:link, a.normal:active, a.normal:visited, .normal {
+			color: var( --r-main-color );
+		}
+		.small {
+			font-size: 80%;
+		}
+	</style>
+</head>
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h3>Migrating the</h2>
+				<h1>WordPress Community from Slack to Matrix</h1>
+				<div style="font-size: .5em; margin-top: 1em">
+					<img src="img/alex.kirk.jpg" width="128" alt="Alex Kirk" style="border-radius: 64px"/><br/>
+					Alex Kirk<br/>
+					<table class="contact">
+						<tr><td>Blog</td><td><a href="https://alex.kirk.at/">https://alex.kirk.at/</a></td></tr>
+						<tr><td>Matrix</td><td>@alex:kirk.at</td></tr>
+					</table>
+				</div>
+			</section>
+
+			<section>
+				<h2>Why migrate from Slack to Matrix</h2>
+			</section>
+
+			<section>
+				<h2>How Open Source works at WordPress</h2>
+				<ul>
+					<li class="fragment">Why chat is important to the WordPress community</li>
+					<li class="fragment">Coordination</li>
+					<li class="fragment">Recurring text meetings at certain times for each meeting</li>
+					<li class="fragment">You have a time and date where you can bring issues forward and the people working on it will be there</li>
+				</ul>
+			</section>
+
+			<section>
+				<a href="https://make.wordpress.org/meetings/">https://make.wordpress.org/meetings/</a><br/>
+				<img src="img/make-wordpress-org-meetings.png" alt="Calendar view of the WordPress.org community meetings" />
+			</section>
+
+			<section>
+				<a href="https://make.wordpress.org/">https://make.wordpress.org/</a><br/>
+				<img src="img/make-wordpress-org.png" alt="Overview of the Making WordPress.org teams including meeting times" />
+			</section>
+
+			<section>
+				<h2>Things that make Slack hard for an open source community</h2>
+				<ul>
+					<li>E-Mail Address signup / invites</li>
+					<li>Common issue at Wordcamps where we onboard new people
+					<ul><li>Full page of instructions → people won’t read it</li></ul>
+				</li>
+					<li>Message retention
+					<ul>
+						<li>10,000 / 90 days message history limit for free plans</li>
+					</ul>
+					<li>Data is siloed behind’s Slack’s doors</li>
+				</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Matrix can do this better</h2>
+				<ul>
+					<li>Federation is designed so that anyone can join</li>
+					<li>→ No retention limits</li>
+					<li>Open Source chat for an Open Source project</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Matrix is still behind on</h2>
+				<ul>
+					<li>Notification Management (big time)</li>
+					<li>Search</li>
+					<li>Access Control for home server members
+						<ul>
+							<li>Anyone can create a new room on the server</li>
+							<li>Matrix Corporal exists but we haven’t configured it</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Making it easier to join</h2>
+				<ul>
+					<li>Chatrix
+						<ul>
+							<li>Powered by Hydrogen with upstream contributions:
+								<ul>
+									<li><a href="https://github.com/vector-im/hydrogen-web/pull/1056">Webworkers for Sync</a> to allow multiple Hyrdogens open in a single browser → multiple Chatrix</li>
+									<li><a href="https://github.com/vector-im/hydrogen-web/pulls?q=is%3Apr+author%3Apsrpinto">more...</a></li>
+								</ul>
+							</li>
+						</ul></li>
+					<li>SSO with WordPress.org</li>
+				</ul>
+			</section>
+
+			<section>
+				<a href="https://make.wordpress.org/polyglots/chat/">https://make.wordpress.org/polyglots/chat/</a><br/>
+				<img src="img/make-wordpress-org-polyglots-chat.png" alt="Making WordPress Polyglots Team chat page" />
+			</section>
+
+
+			<section>
+				<p>Creating a new post with a Chatrix block</p>
+				<video data-autoplay data-src="img/create-chatrix-page.mp4" type="video/mp4" alt="An animatied gif showing how to create a post with a Chatrix block"></video>
+			</section>
+
+
+			<section>
+				<h2>Making the Migration easier with a bridge</h2>
+				<ul>
+					<li>Created the users from Slack with a script (not open source yet)</li>
+					<li>Slack bridge
+						<ul>
+							<li>We’re using a <a href="http://github.com/Automattic/matrix-appservice-slack">forked version</a> of matrix-appservice-slack
+								<ul>
+									<li>We submitted some fixes upstream, please merge? :)</li>
+								</ul>
+							</li>
+							<li>Modified the bridge to puppet users on the Matrix side since we know the users exist</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Migrating history seamlessly</h2>
+				<ul>
+					<li>Create room with bridge first (no history)</li>
+					<li>Create a second room and migrate the history there</li>
+					<li>Invite everyone who is a member on Slack to the new room
+						<ul>
+							<li>(who hasn't said anything yet)</li>
+						</ul>
+					</li>
+					<li>Copy events from the first room for catching up to real-time</li>
+					<li>Change room aliases, delete old room</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Still missing: App migration</h2>
+				<ul>
+					<li>Simple apps can be used from Matrix through the Slack bridge
+					<li>Ecosystem problem
+						<ul>
+							<li>Companies build Slack apps using internal APIs</li>
+							<li>→ Cannot replicate on Matrix</li>
+							<li>Solution might be: bridge from Slack?</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h1>Thank You!</h1>
+				<h2>Questions?</h2>
+			</section>
+		</div>
+	</div>
+	<script src="dist/reveal.js"></script>
+	<script src="dist/plugin/markdown/markdown.js"></script>
+	<script src="dist/plugin/notes/notes.js"></script>
+	<script>
+		Reveal.initialize({
+			controls: true,
+			controlsTutorial: true,
+			progress: true,
+			hash: true,
+			autoPlayMedia: true,
+			slideNumber: 'c/t',
+			width: 1200,
+			plugins: [ RevealNotes, RevealMarkdown ],
+			dependencies: [{ src: 'dist/plugin/external/external.js', condition: function() { return !!document.querySelector( '[data-external]' ); } }]
+		}).then( () => {
+		});
+	</script>
+</body>
+</html>
