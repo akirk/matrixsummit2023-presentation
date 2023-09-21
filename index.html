@@ -13,9 +13,17 @@
 			fill: var( --r-background-color );
 			background: var( --r-background-color );
 		}
+		.reveal ul {
+			margin-left: 0;
+			padding-left: 0;
+		}
 		ul li {
 			margin-bottom: .5em;
 			list-style-type: none;
+		}
+		li ul li {
+			margin-bottom: .2em;
+			list-style-type: "- ";
 		}
 		table.contact {
 			margin-top: 2em;
@@ -30,8 +38,11 @@
 		a:link {
 			text-decoration: underline;
 		}
-		a.normal:link, a.normal:active, a.normal:visited, .normal {
+		a.normal:link, a.normal:active, a.normal:visited {
 			color: var( --r-main-color );
+		}
+		a.normal:hover {
+			color: var( --r-link-color );
 		}
 		.small {
 			font-size: 80%;
@@ -42,7 +53,7 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>
-				<h3>Migrating the</h2>
+				<h3>Migrating the</h3>
 				<h1>WordPress Community from Slack to Matrix</h1>
 				<div style="font-size: .5em; margin-top: 1em">
 					<img src="img/alex.kirk.jpg" width="128" alt="Alex Kirk" style="border-radius: 64px"/><br/>
@@ -55,22 +66,66 @@
 			</section>
 
 			<section>
-				<h2>Why migrate from Slack to Matrix</h2>
+				<h2>Alex Kirk</h2>
+				<ul>
+					<li>From Vienna, Austria (ich spreche auch deutsch)</li>
+					<li>Working for <a href="https://automattic.com/">Automattic</a> since 2014 (9 years!)</li>
+					<li>Automattic = company of WordPress founder <a href="https://ma.tt/">Matt Mullenweg</a></li>
+					<li>I'm an Engineer, leading teams around Localization &amp; Matrix</li>
+					<li>Also working in the ActivityPub field, see my <a href="https://wordpress.org/plugins/friends/">Friends plugin</a></li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>What is WordPress?</h2>
+				<ul>
+					<li>A popular PHP CMS for websites and blogs, started in 2003</li>
+					<li class="fragment">Today it powers <a href="https://w3techs.com/technologies/details/cm-wordpress">over 43% of all websites</a> on the internet</li>
+					<li class="fragment">Features a <a href="https://github.com/WordPress/gutenberg">block editor</a> to edit posts and themes</li>
+					<li class="fragment">Well known for <a href="https://wordpress.org/plugins/">plugins</a> like<br/>Yoast SEO, Advanced Custom Fields, WooCommerce</li>
+					<li class="fragment"><a href="https://developer.wordpress.org/themes/getting-started/wordpress-licensing-the-gpl/">Open Source under the GPL</a></li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>How the WordPress project works</h2>
+				<p><a href="https://make.wordpress.org/">https://make.wordpress.org/</a></p>
+
+				<ul>
+					<li></li>
+					<li class="fragment">20 "Make teams": Accessibility, Core, Design, Polyglots, ...</li>
+					<li class="fragment">Each team has a P2 (blog) for
+						<ul>
+							<li>Announcements</li>
+							<li>Proposals</li>
+							<li>Meeting summaries</li>
+							<li>Documentation (handbooks)</li>
+						</ul>
+					</li>
+					<li class="fragment">WordCamps: <a href="https://europe.wordcamp.org/">EU</a>, <a href="https://asia.wordcamp.org/">Asia</a>, <a href="https://us.wordcamp.org/">US</a>, <a href="https://germany.wordcamp.org/">Germany</a> (soon: Oct 19-22), <a href="https://central.wordcamp.org/">...</a></li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Five for the Future</h2>
+				<p><a href="https://wordpress.org/five-for-the-future/">https://wordpress.org/five-for-the-future/</a></p>
+				<ul>
+					<li class="fragment">Companies and individuals <a href="https://wordpress.org/five-for-the-future/pledges/">pledge to give 5%</a> of time or workforce</li>
+					<li class="fragment">A 100-people company would sponsor 5 people full time</li>
+					<li class="fragment">Individuals: 2hrs / week</li>
+					<li class="fragment">→ Many people from different companies collaborate</li>
+				</ul>
 			</section>
 
 			<section>
 				<h2>How Open Source works at WordPress</h2>
 				<ul>
-					<li class="fragment">Why chat is important to the WordPress community</li>
-					<li class="fragment">Coordination</li>
-					<li class="fragment">Recurring text meetings at certain times for each meeting</li>
-					<li class="fragment">You have a time and date where you can bring issues forward and the people working on it will be there</li>
+					<li>Issues are logged in Trac or Github</li>
+					<li class="fragment">We have multiple trackers, e.g. <a href="https://core.trac.wordpress.org/">Core</a>, <a href="https://meta.trac.wordpress.org/">Meta</a>, <a href="https://github.com/WordPress/gutenberg/issues">Gutenberg</a></li>
+					<li class="fragment">Discussions and status updates happen in tickets</li>
+					<li class="fragment">In (bi-)weekly meetings, the contributors coordinate, share news, scrub bug, etc.</li>
+					<li class="fragment"><a href="https://make.wordpress.org/meetings/">These meetings</a> give everyone a chance to bring issues forward and discuss them with project participants</li>
 				</ul>
-			</section>
-
-			<section>
-				<a href="https://make.wordpress.org/meetings/">https://make.wordpress.org/meetings/</a><br/>
-				<img src="img/make-wordpress-org-meetings.png" alt="Calendar view of the WordPress.org community meetings" />
 			</section>
 
 			<section>
@@ -79,57 +134,78 @@
 			</section>
 
 			<section>
-				<h2>Things that make Slack hard for an open source community</h2>
+				<a href="https://make.wordpress.org/meetings/">https://make.wordpress.org/meetings/</a><br/>
+				<img src="img/make-wordpress-org-meetings.png" alt="Calendar view of the WordPress.org community meetings" />
+			</section>
+
+			<section>
+				<h2>Why migrate away from Slack?</h2>
 				<ul>
-					<li>E-Mail Address signup / invites</li>
-					<li>Common issue at Wordcamps where we onboard new people
-					<ul><li>Full page of instructions → people won’t read it</li></ul>
-				</li>
-					<li>Message retention
-					<ul>
-						<li>10,000 / 90 days message history limit for free plans</li>
-					</ul>
-					<li>Data is siloed behind’s Slack’s doors</li>
-				</li>
+					<li class="fragment">Slack was not designed for an open source community
+						<ul>
+							<li>Sign up is E-Mail domain based → <tt>@chat.wordpress.org</tt></li>
+							<li>We have <a href="https://make.wordpress.org/chat/">a guide</a>, but people often get tripped up</li>
+						</ul>
+					</li>
+					<li class="fragment">Non-Open Source chat for an Open Source project</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Slack &amp; an open source community</h2>
+				<ul>
+					<li class="fragment">E-Mail Address signup / invites</li>
+					<li class="fragment">Common issue at WordCamps where we onboard new people<br/><a href="https://make.wordpress.org/chat/">Full page of instructions</a> → people won’t read it</li>
+					<li class="fragment">Message retention
+						<ul>
+							<li>10,000 / 90 days message history limit for free plans</li>
+						</ul>
+						<li>Data is siloed behind Slack’s doors</li>
+					</li>
 				</ul>
 			</section>
 
 			<section>
 				<h2>Matrix can do this better</h2>
 				<ul>
-					<li>Federation is designed so that anyone can join</li>
-					<li>→ No retention limits</li>
-					<li>Open Source chat for an Open Source project</li>
+					<li class="fragment">Federation has been designed so that anyone can join</li>
+					<li class="fragment">Login via existing authentication system (SSO / OIDC)</li>
+					<li class="fragment">No retention limits</li>
+					<li class="fragment">Open Source chat for an Open Source project</li>
 				</ul>
 			</section>
 
 			<section>
 				<h2>Matrix is still behind on</h2>
 				<ul>
-					<li>Notification Management (big time)</li>
-					<li>Search</li>
-					<li>Access Control for home server members
+					<li>Element's UX
+						<ul>
+							<li>Notification Management (big time)</li>
+							<li>Search</li>
+						</ul>
+					</li>
+					<li class="fragment">Other clients miss things like threads</li>
+					<li class="fragment">Access Control for home server members
 						<ul>
 							<li>Anyone can create a new room on the server</li>
-							<li>Matrix Corporal exists but we haven’t configured it</li>
+							<li>Matrix Corporal exists but we didn't yet dive into it</li>
 						</ul>
 					</li>
 				</ul>
 			</section>
 
 			<section>
-				<h2>Making it easier to join</h2>
+				<h2>Making it easier to join Matrix</h2>
+				<p><a href="https://github.com/Automattic/chatrix">Chatrix</a>: Matrix client in a WordPress block</p>
 				<ul>
-					<li>Chatrix
+					<li class="fragment">Each block can be configured individually</li>
+					<li class="fragment">Set a home server, can be restricted to a single room</li>
+					<li class="fragment">Based on Hydrogen with upstream contributions:
 						<ul>
-							<li>Powered by Hydrogen with upstream contributions:
-								<ul>
-									<li><a href="https://github.com/vector-im/hydrogen-web/pull/1056">Webworkers for Sync</a> to allow multiple Hydrogens open in a single browser → multiple Chatrix</li>
-									<li><a href="https://github.com/vector-im/hydrogen-web/pulls?q=is%3Apr+author%3Apsrpinto">more...</a></li>
-								</ul>
-							</li>
-						</ul></li>
-					<li>SSO with WordPress.org</li>
+							<li><a href="https://github.com/vector-im/hydrogen-web/pull/1056">Webworkers for Sync</a> to allow multiple Hydrogens open in a single browser → multiple Chatrix</li>
+							<li><a href="https://github.com/vector-im/hydrogen-web/pulls?q=is%3Apr+author%3Apsrpinto">more...</a></li>
+						</ul>
+					</li>
 				</ul>
 			</section>
 
@@ -144,19 +220,40 @@
 				<video data-autoplay data-src="img/create-chatrix-page.mp4" type="video/mp4" alt="An animatied gif showing how to create a post with a Chatrix block"></video>
 			</section>
 
+			<section>
+				<h2>Making it easier to join Matrix</h2>
+				<p><a href="https://github.com/Automattic/wp-openid-connect-server">OpenID Connect Server</a> WordPress plugin</p>
+				<ul>
+					<li class="fragment">Makes your WordPress an OIDC provider</li>
+					<li class="fragment">→ WordPress.org users can login with their account</li>
+				</ul>
+			</section>
+
+
+			<section>
+				<h2>Matrix Server</h2>
+				<p><tt><a href="https://community.wordpress.org">community.wordpress.org</a></tt></p>
+				<ul>
+					<li>Synapse
+						<ul>
+							<li>Slack bridge</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
 
 			<section>
 				<h2>Making the Migration easier with a bridge</h2>
 				<ul>
-					<li>Created the users from Slack with a script (not open source yet)</li>
-					<li>Slack bridge
+					<li class="fragment">Created the users from Slack with a script (not open source yet)</li>
+					<li class="fragment">Slack bridge
 						<ul>
 							<li>We’re using a <a href="http://github.com/Automattic/matrix-appservice-slack">forked version</a> of matrix-appservice-slack
 								<ul>
 									<li>We submitted some fixes upstream, please merge? :)</li>
 								</ul>
 							</li>
-							<li>Modified the bridge to puppet users on the Matrix side since we know the users exist</li>
+							<li class="fragment">Extended the bridge to puppet users on the Matrix side since we know the users exist</li>
 						</ul>
 					</li>
 				</ul>
@@ -164,24 +261,29 @@
 
 			<section>
 				<h2>Migrating history seamlessly</h2>
-				<ul>
-					<li>Create room with bridge first (no history)</li>
-					<li>Create a second room and migrate the history there</li>
-					<li>Invite everyone who is a member on Slack to the new room
+				<ol>
+					<li class="fragment">Create room and bridge it (it won't have history)</li>
+					<li class="fragment">Create a second room and migrate the history there
 						<ul>
-							<li>(who hasn't said anything yet)</li>
+							<li>Import in sequence, backdating events (appservice)</li>
+							<li>Add users as they say something or join events (appservice)</li>
 						</ul>
 					</li>
-					<li>Copy events from the first room for catching up to real-time</li>
-					<li>Change room aliases, delete old room</li>
-				</ul>
+					<li class="fragment">Invite everyone who is a member on Slack to the new room
+						<ul>
+							<li>(the missing ones, who haven't said anything yet)</li>
+						</ul>
+					</li>
+					<li class="fragment">Copy events from the first room to catch up with real-time</li>
+					<li class="fragment">Change room aliases, delete old room</li>
+				</ol>
 			</section>
 
 			<section>
 				<h2>Still missing: App migration</h2>
 				<ul>
-					<li>Simple apps can be used from Matrix through the Slack bridge
-					<li>Ecosystem problem
+					<li class="fragment">Simple apps can be used from Matrix through the Slack bridge</li>
+					<li class="fragment">Ecosystem problem
 						<ul>
 							<li>Companies build Slack apps using internal APIs</li>
 							<li>→ Cannot replicate on Matrix</li>
@@ -194,11 +296,11 @@
 			<section>
 				<h1>Thank You!</h1>
 				<h2>Questions?</h2>
+				<p><a href="https://alex.kirk.at/matrix-summit-2023/">https://alex.kirk.at/matrix-summit-2023/</a></p>
 			</section>
 		</div>
 	</div>
 	<script src="dist/reveal.js"></script>
-	<script src="dist/plugin/markdown/markdown.js"></script>
 	<script src="dist/plugin/notes/notes.js"></script>
 	<script>
 		Reveal.initialize({
@@ -209,8 +311,6 @@
 			autoPlayMedia: true,
 			slideNumber: 'c/t',
 			width: 1200,
-			plugins: [ RevealNotes, RevealMarkdown ],
-			dependencies: [{ src: 'dist/plugin/external/external.js', condition: function() { return !!document.querySelector( '[data-external]' ); } }]
 		}).then( () => {
 		});
 	</script>
