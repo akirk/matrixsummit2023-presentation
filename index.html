@@ -160,8 +160,8 @@
 						<ul>
 							<li>10,000 / 90 days message history limit for free plans</li>
 						</ul>
-						<li>Data is siloed behind Slack’s doors</li>
 					</li>
+					<li class="fragment">Data is siloed behind Slack’s doors</li>
 				</ul>
 			</section>
 
@@ -171,6 +171,7 @@
 					<li class="fragment">Federation has been designed so that anyone can join</li>
 					<li class="fragment">Login via existing authentication system (SSO / OIDC)</li>
 					<li class="fragment">No retention limits</li>
+					<li class="fragment">Unite several Slack workspaces (e.g. for local communities)</li>
 					<li class="fragment">Open Source chat for an Open Source project</li>
 				</ul>
 			</section>
@@ -237,6 +238,7 @@
 					<li>Synapse
 						<ul>
 							<li>Slack bridge</li>
+							<li>OpenID connect configured</li>
 						</ul>
 					</li>
 				</ul>
@@ -265,17 +267,13 @@
 					<li class="fragment">Create room and bridge it (it won't have history)</li>
 					<li class="fragment">Create a second room and migrate the history there
 						<ul>
+							<li>Add all users who are in the room in Slack</li>
 							<li>Import in sequence, backdating events (appservice)</li>
-							<li>Add users as they say something or join events (appservice)</li>
-						</ul>
-					</li>
-					<li class="fragment">Invite everyone who is a member on Slack to the new room
-						<ul>
-							<li>(the missing ones, who haven't said anything yet)</li>
+							<li>If a user is no longer in the room, we re-invite them</li>
 						</ul>
 					</li>
 					<li class="fragment">Copy events from the first room to catch up with real-time</li>
-					<li class="fragment">Change room aliases, delete old room</li>
+					<li class="fragment">Change room aliases, reattach bridge, delete old room</li>
 				</ol>
 			</section>
 
