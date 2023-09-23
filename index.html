@@ -75,10 +75,13 @@
 				<h2>Alex Kirk</h2>
 				<ul>
 					<li>From Vienna, Austria (ich spreche auch deutsch)</li>
-					<li>Working for <a href="https://automattic.com/">Automattic</a> since 2014</li>
-					<li>Automattic = company of WordPress co-founder <a href="https://ma.tt/">Matt Mullenweg</a></li>
-					<li>I'm an Engineer, leading teams around Localization &amp; Matrix</li>
-					<li>Also working in the ActivityPub field, see my <a href="https://wordpress.org/plugins/friends/">Friends plugin</a></li>
+					<li>At <a href="https://automattic.com/">Automattic</a> since 2014
+						<ul>
+							<li>Engineer, leading teams around Localization &amp; Matrix</li>
+							<li>Sponsored to contribute to WordPress.org in Meta and Polyglots</li>
+						</ul>
+					</li>
+					<li>Also working in the ActivityPub field, see my <a href="https://wordpress.org/plugins/friends/">Friends plugin</a><br><span style="font-size: 80%">Your WordPress can be your personal Mastodon instance with a nice address</span></li>
 				</ul>
 			</section>
 
@@ -156,7 +159,7 @@
 					<li class="fragment">Slack was not designed for an open source community
 						<ul>
 							<li>Sign up is E-Mail domain based → <tt>@chat.wordpress.org</tt></li>
-							<li>We have <a href="https://make.wordpress.org/chat/">a guide</a>, but people often get tripped up</li>
+							<li>E-Mail forwarding needed so that people receive their invite</li>
 						</ul>
 					</li>
 					<li class="fragment">Non-Open Source chat for an Open Source project</li>
@@ -166,7 +169,7 @@
 			<section>
 				<h2>Slack &amp; an open source community</h2>
 				<ul>
-					<li class="fragment">E-Mail address based signup, needs invites</li>
+					<li class="fragment">Complexity through E-Mail-based signup with invites</li>
 					<li class="fragment">Common issue at WordCamps where we onboard new people<br/><a href="https://make.wordpress.org/chat/">Full page of instructions</a> → people won’t read it</li>
 					<li class="fragment">Message retention
 						<ul>
@@ -178,7 +181,7 @@
 			</section>
 
 			<section>
-				<h2>Matrix can do this better</h2>
+				<h2>Matrix &amp; an open source community</h2>
 				<ul>
 					<li class="fragment">Federation has been designed so that anyone can join</li>
 					<li class="fragment">Login via existing authentication system (SSO / OIDC)</li>
@@ -193,13 +196,18 @@
 				<ul>
 					<li>Element's UX
 						<ul>
-							<li class="fragment">Notification Management<br/>&nbsp;&nbsp;No dedicated threads and mentions view</li>
-							<li class="fragment">Search: No subfilters, icon looks like in-room search only</li>
+							<li class="fragment">Notification Management
+								<ul>
+									<li class="fragment">No dedicated threads and mentions view</li>
+									<li class="fragment">Cannot mark message as unread</li>
+								</ul>
+							</li>
+							<li class="fragment">Search: No filters, icon looks like it's in-room search only</li>
 							<li class="fragment">Joining room experience (need click an "add" icon to join)</li>
 						</ul>
 					</li>
 					<li class="fragment">Other clients miss important features like threads</li>
-					<li class="fragment">Access Control for server users: Anyone can create a new room<br/>(we know about  Matrix Corporal but we didn't yet dive into it)</li>
+					<li class="fragment">Access Control for server users: Anyone can create a new room<br/><small>(we know about  Matrix Corporal but we didn't yet dive into it)</small></li>
 						</ul>
 					</li>
 				</ul>
@@ -213,8 +221,8 @@
 					<li class="fragment">Set a home server, can be restricted to a single room</li>
 					<li class="fragment">Based on Hydrogen with upstream contributions:
 						<ul>
-							<li><a href="https://github.com/vector-im/hydrogen-web/pull/1056">Webworkers for Sync</a> to allow multiple Hydrogens open in a single browser → multiple Chatrix</li>
-							<li><a href="https://github.com/vector-im/hydrogen-web/pulls?q=is%3Apr+author%3Apsrpinto">more...</a></li>
+							<li><a href="https://github.com/vector-im/hydrogen-web/pull/1056">Webworkers for Sync</a> to allow multiple Hydrogens open in a single browser → multiple Chatrix blocks on the same page</li>
+							<li><a href="https://github.com/vector-im/hydrogen-web/pulls?q=is%3Apr+author%3Apsrpinto">multiple bugfixes</a> around SSO and workers</li>
 						</ul>
 					</li>
 				</ul>
@@ -238,17 +246,25 @@
 					<li class="fragment">Makes your WordPress an OIDC provider</li>
 					<li class="fragment">→ WordPress.org users can login with their account</li>
 				</ul>
+				<img src="img/authorize-matrix.png" alt="" height="300">
+			</section>
+
+			<section>
+				<h2>Making it easier to join Matrix</h2>
+				<p>We host <a href="https://matrix.wordpress.net/">a preconfigured Element Web</a></p>
+
+				<img src="img/matrix-wordpress-net.png" alt="" height="500">
 			</section>
 
 			<section>
 				<h2>Making the Migration easier with a bridge</h2>
 				<ul>
-					<li class="fragment">Created the users from Slack with a script (not open source yet)</li>
+					<li class="fragment">Created the users on the homeserver with a script</li>
 					<li class="fragment">Slack bridge
 						<ul>
 							<li>We’re using a <a href="http://github.com/Automattic/matrix-appservice-slack">forked version</a> of matrix-appservice-slack
 								<ul>
-									<li>We submitted some fixes upstream, please merge? :)</li>
+									<li><a href="https://github.com/matrix-org/matrix-appservice-slack/pulls/psrpinto">Upstream fixes</a> waiting to be merged :)</li>
 								</ul>
 							</li>
 							<li class="fragment">Extended the bridge to puppet users on the Matrix side since we know the users exist</li>
@@ -263,9 +279,9 @@
 					<li class="fragment">Create room and bridge it (it won't have history)</li>
 					<li class="fragment">Create a second room and migrate the history there
 						<ul>
-							<li>Add all users who are in the room in Slack</li>
-							<li>Import in sequence, backdating events (appservice)</li>
-							<li>If a user is no longer in the room, we re-invite them</li>
+							<li class="fragment">Add all users who are in the room in Slack</li>
+							<li class="fragment">Import in sequence, backdating events (appservice)</li>
+							<li class="fragment">If a user is no longer in the room, we re-invite them</li>
 						</ul>
 					</li>
 					<li class="fragment">Copy events from the first room to catch up with real-time</li>
@@ -300,20 +316,19 @@
 					<li class="fragment">Simple apps can be used from Matrix through the Slack bridge</li>
 					<li class="fragment">Ecosystem problem
 						<ul>
-							<li>Companies build Slack apps using internal APIs</li>
-							<li>→ Cannot replicate on Matrix</li>
-							<li>Solution might be: bridge from Slack?</li>
+							<li>Companies build Slack apps using internal APIs<br/>→ Cannot replicate on Matrix</li>
+							<li>Need to evaluate each Slack app and find a specific solution</li>
 						</ul>
 					</li>
 				</ul>
 			</section>
 
 			<section>
-				<h2>Random Tips</h2>
+				<h2>Misc Tips</h2>
 				<ul>
 					<li class="fragment">Temorarily turn off the <tt>push</tt> setting in Synapse while importing
 						<ul>
-							<li class="fragment">Our first import of a room resulted in a db size of 257gb for a Slack channel with 2.5k users and 90k messages</li>
+							<li class="fragment">Our first import of a room resulted in a db size of 257 GB for a Slack channel with 2.5k users and 90k messages</li>
 						</ul>
 					</li>
 					<li class="fragment">OIDC: Synapse queries the <tt>userinfo</tt> endpoint even for a JWT</li>
@@ -323,19 +338,20 @@
 							<li class="fragment">Redirect it to your <a href="https://make.wordpress.org/chat/matrix/">Matrix onboarding guide</a></li>
 						</ul>
 					</li>
+					<li class="fragment">Pick a server address that doesn't convey they represent the project</li>
 				</ul>
 			</section>
 
 			<section>
 				<h2>Trial Phase</h2>
 				<ul>
-					<li class="fragment">Making WordPress is not officially a Matrix community yet</li>
+					<li class="fragment"><a href="https://make.wordpress.org">Making WordPress</a> is not a Matrix-only community yet</li>
 					<li class="fragment">Slack and Matrix work in parallel for now</li>
-					<li class="fragment">Still unsure about community acceptance
+					<li class="fragment">Still inconclusive about community acceptance
 						<ul>
-							<li>Slack is widespread in WordPress based companies</li>
+							<li>Slack is widespread in WordPress-based companies</li>
 							<li>More convenient to just have one chat client</li>
-							<li class="fragment">Selling point: (personal) cross-org spaces</li>
+							<li class="fragment">Selling point: (individual) cross-org spaces</li>
 
 						</ul>
 					</li>
@@ -344,8 +360,7 @@
 
 			<section>
 				<h2>We're Hiring!</h2>
-				<p>We're hiring Matrix Engineers</p>
-				<p>Not currently listed on <a href="https://automattic.com/work-with-us/">https://automattic.com/work-with-us/</a></p>
+				<p>Automattic is hiring Matrix Engineers</p>
 				<p>Ping me at <tt>@alex:kirk.at</tt></p>
 			</section>
 
