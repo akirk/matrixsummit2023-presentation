@@ -47,6 +47,11 @@
 		.small {
 			font-size: 80%;
 		}
+		tt {
+			background-color: #333;
+			border-radius: 4px;
+			border: 1px solid #666;
+		}
 	</style>
 </head>
 <body>
@@ -120,7 +125,7 @@
 
 			<section>
 				<h2>Contributors to WP6.2 by Company</h2>
-				<object data="img/WP62-company-contributors.svg" type="image/svg+xml"  width="1000" height="500" preserveAspectRatio="xMidYMid meet"></object>
+				<object data="img/WP62-company-contributors.svg" type="image/svg+xml"  width="1000" height="500"></object>
 				<p style="font-size: 10px"><a href="https://jeanbaptisteaudras.com/2023/04/contribution-stats-for-wordpress-6-2-dolphy/">https://jeanbaptisteaudras.com/2023/04/contribution-stats-for-wordpress-6-2-dolphy/</a></p>
 			</section>
 
@@ -188,15 +193,13 @@
 				<ul>
 					<li>Element's UX
 						<ul>
-							<li>Notification Management (big time)</li>
-							<li>Search</li>
+							<li class="fragment">Notification Management<br/>no dedicated threads and mentions view</li>
+							<li class="fragment">Search: No subfilters</li>
+							<li class="fragment">Joining room experience (click + icon)</li>
 						</ul>
 					</li>
-					<li class="fragment">Other clients miss things like threads</li>
-					<li class="fragment">Access Control for home server members
-						<ul>
-							<li>Anyone can create a new room on the server</li>
-							<li>Matrix Corporal exists but we didn't yet dive into it</li>
+					<li class="fragment">Other clients miss important features like threads</li>
+					<li class="fragment">Access Control for server users: Anyone can create a new room<br/>(we know about  Matrix Corporal but we didn't yet dive into it)</li>
 						</ul>
 					</li>
 				</ul>
@@ -281,7 +284,7 @@
 							<li>Migration appservice</li>
 						</ul>
 					</li>
-					<li>Migrated
+					<li class="fragment">We migrated
 						<ul>
 							<li>~ 3m messages in ~170 rooms</li>
 							<li>~ 45k users</li>
@@ -306,16 +309,43 @@
 			</section>
 
 			<section>
+				<h2>Random Tips</h2>
+				<ul>
+					<li class="fragment">Temorarily turn off the <tt>push</tt> setting in Synapse while importing
+						<ul>
+							<li class="fragment">Our first import of a room resulted in a db size of 257gb for a Slack channel with 2.5k users and 90k messages</li>
+						</ul>
+					</li>
+					<li class="fragment">OIDC: Synapse queries the <tt>userinfo</tt> endpoint even for a JWT</li>
+					<li class="fragment">Serve something useful on the homeserver address HTTPS URL
+						<ul>
+							<li>People will enter it in their browser</li>
+							<li class="fragment">Redirect it to your <a href="https://make.wordpress.org/chat/matrix/">Matrix onboarding guide</a></li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+
+			<section>
 				<h2>Trial Phase</h2>
-				<p class="fragment">Making WordPress is not officially a Matrix community yet</p>
-				<p class="fragment">Slack and Matrix work in parallel for now</p>
-				<p class="fragment">Still unsure about community acceptance</p>
+				<ul>
+					<li class="fragment">Making WordPress is not officially a Matrix community yet</li>
+					<li class="fragment">Slack and Matrix work in parallel for now</li>
+					<li class="fragment">Still unsure about community acceptance
+						<ul>
+							<li>Slack is widespread in WordPress based companies</li>
+							<li>More convenient to just have one chat client</li>
+							<li class="fragment">Selling point: (personal) cross-org spaces</li>
+
+						</ul>
+					</li>
+				</ul>
 			</section>
 
 			<section>
 				<h2>We're Hiring!</h2>
 				<p>We're hiring Matrix Engineers</p>
-				<p>Not listed on <a href="https://automattic.com/work-with-us/">https://automattic.com/work-with-us/</a></p>
+				<p>Not currently listed on <a href="https://automattic.com/work-with-us/">https://automattic.com/work-with-us/</a></p>
 				<p>Ping me at <tt>@alex:kirk.at</tt></p>
 			</section>
 
@@ -323,6 +353,7 @@
 				<h1>Thank You!</h1>
 				<h2>Questions?</h2>
 				<p><a href="https://alex.kirk.at/matrix-summit-2023/">https://alex.kirk.at/matrix-summit-2023/</a></p>
+				<object data="img/qr-alex-kirk-at.svg" type="image/svg+xml"  width="200" height="200"></object>
 			</section>
 		</div>
 	</div>
